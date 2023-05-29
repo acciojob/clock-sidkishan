@@ -1,14 +1,40 @@
-//your JS code here. If required.
-let p = document.getElementById("timer");
-let d = new Date();
-let c = d.getDay();
-let a = d.getDate();
-let b = d.getFullYear();
+let p=document.createElement('p');
+p.id="timer";
 
-let k = d.getHours();
-let q = d.getMinutes();
- let h = setInterval(() => {
-    let z = d.getSeconds();
-}, 1000);
-let s = h;
-console.log(p.innerText = c+"/"+a+"/"+b+", "+k+":"+q+":"+s+" Am");
+
+function getTime(){
+    
+    
+    let dateInfo=new Date();
+// console.log(dateInfo);
+// dateInfo.setHours(24);
+// dateInfo.setMinutes(1);
+let date=dateInfo.toLocaleDateString();
+
+let time=dateInfo.toLocaleTimeString().split(":");
+let hrs=time[0];
+let min=time[1];
+let sec=time[2];
+
+// console.log(date,hrs,min,sec);
+let isPm=false;
+let fullTime;
+
+if(hrs>12){
+  isPm=true;
+  fullTime=`${hrs-12}:${min}:${sec} ${isPm?'PM':'AM'}`;
+}
+else{
+    isPm=false;
+    fullTime=`${hrs}:${min}:${sec} ${isPm?'PM':'AM'}`;
+}
+console.log(fullTime);
+p.innerText=`${date}, ${fullTime} `;
+document.body.append(p);
+}
+
+setInterval(getTime,1000);
+
+
+
+// let data=`${month}/${date}/${year},`
